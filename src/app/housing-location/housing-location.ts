@@ -1,0 +1,29 @@
+import { Component, input } from '@angular/core';
+import { HousingLocationInfo } from '../housing-location';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-housing-location',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  template: `
+    <section class="listing">
+      <img class="listing-photo"
+        [src] = "housingLocation().photo"
+        alt = "Exterior photo of {{housingLocation().name}}"
+        crossorigin />
+      <h2 class = "listing-heading">
+        {{housingLocation().name}}
+      </h2>
+      <p class="listing-location">
+        {{housingLocation().city}}
+      </p>
+      <a [routerLink] = "['/details', housingLocation().id]">Learn More</a>
+    </section>
+  `,
+  styleUrls: ['./housing-location.css'],
+})
+export class HousingLocation {
+  housingLocation = input.required<HousingLocationInfo>();
+}
